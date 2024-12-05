@@ -19,6 +19,7 @@ public class Game  {
 	    obj.setResizable(false);
 	    obj.setVisible(true);
 	    obj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		System.out.println("What level do you want?");
 	    obj.add(gamePlay);
 	    obj.addKeyListener(gamePlay);
 	}

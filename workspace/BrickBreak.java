@@ -128,12 +128,12 @@ public class BrickBreak extends JPanel implements KeyListener, ActionListener {
 		// paddle collision
 		if (ballHitBox.intersects(playerHitBox)) {
 			ball.reverseY();
-			if (player.getVelocity() > 0) {
+			/*if (player.getVelocity() > 0) {
 				ball.setXVelocity(1);
 			}
 			if (player.getVelocity() < 0) {
 				ball.setXVelocity(-1);
-			}
+			}*/
 		}
 
 		// brick collision
@@ -175,6 +175,11 @@ public class BrickBreak extends JPanel implements KeyListener, ActionListener {
 			ball.reverseY();
 		}
 
+		//paddle hitting wall
+		if (player.getX() < 0 || player.getX() > 600) {
+			player.reverseVelocity();
+		}
+
 
 	}
 
@@ -204,17 +209,22 @@ public class BrickBreak extends JPanel implements KeyListener, ActionListener {
 	//postondition: paddle moves according to keys pressed (left/right). If the user presses enter the game is restarted.
 	@Override
 	public void keyPressed(KeyEvent e) {
+		
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			System.out.println("right");
 			play = true;
-			if (player.getVelocity() == 0)
+			if(player.getVelocity() == 0) {
 				player.addVelocity(8);
+			}
 			else {
 				player.addVelocity(4);
 			}
 		} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+		System.out.println("left");
 			play = true;
-			if (player.getVelocity() == 0)
+			if(player.getVelocity() == 0) {
 				player.addVelocity(-8);
+			}
 			else {
 				player.addVelocity(-4);
 			}
@@ -229,7 +239,7 @@ public class BrickBreak extends JPanel implements KeyListener, ActionListener {
 			player.setX(310);
 			player.setVelocity(0);
 			score = 0;
-			totalBricks = 21;
+			totalBricks = mapWidth * mapHeight;
 			for (int i = 0; i < mapHeight; i++) {
 				for (int j = 0; j < mapWidth; j++) {
 					map[i][j] = new Brick(540 / mapWidth, 300 / mapHeight, j * (540 + xGap) / mapWidth + 80,
@@ -241,6 +251,4 @@ public class BrickBreak extends JPanel implements KeyListener, ActionListener {
 		}
 
 	}
-
-
 }
